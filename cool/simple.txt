@@ -1,0 +1,572 @@
+1.simple programs this
+
+import 'dart:io';
+void main(){
+print('Simple calculator');
+print('enter first number');
+double num1=double.parse(stdin.readLineSync()!);
+print('enter second number');
+double num2=double.parse(stdin.readLineSync()!);
+print('enter your choice');
+print('1.Addition');
+print('2.subtract');
+print('3.Multiply');
+print('4.division');
+int choice=int.parse(stdin.readLineSync()!);
+double result;
+switch(choice){
+case 1:
+result=num1+num2;
+print('Result:$num1+$num2');
+break;
+case 2:
+result=num1-num2;
+print('Result:$num1-$num2');
+break;
+case 3:
+result=num1*num2;
+print('Result:$num1*$num2');
+break;
+case 4:
+if(num2==0){
+print('division by zero is not possible');
+}else{
+result=num1/num2;
+print('Result:$num1/$num2');
+break;
+}
+}
+}
+2.(text,image,container)
+import 'package:flutter/material.dart';
+
+class textwidget extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+
+    return Container(
+
+        margin:EdgeInsets.all(15.0),
+        child: Text("Hello A.S.K",textDirection: TextDirection.ltr,
+    style: TextStyle(
+      decoration: TextDecoration.none,
+    color: Colors.red,
+      fontSize: 30.0,
+      // Set text color here
+    ),
+    ));
+  }}
+class imagewidget extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+  AssetImage asset= AssetImage("images/auth.jpg");
+  Image image=Image(image: asset,width: 250,height: 250,);
+  return image;
+}}
+class SANDEEP extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+
+    return Center(
+      child: Container(
+ // Ensure this is enough to fit both widgets
+        child:Center(
+        child: Column(
+
+          children: <Widget>[
+            imagewidget(), // Place the image at the top
+            textwidget(),  // Place the text at the bottom
+          ],
+        ),
+
+
+      ),
+    ));
+  }
+}
+
+void main(){
+  runApp(MaterialApp(
+    title: "Text, Container widgets",
+  home: Scaffold(
+  appBar: AppBar(title: Text("A.S.K App",
+    style: TextStyle(fontSize: 35.0,
+  color: Colors.green),),),
+    body: Material(
+      color: Colors.lightBlueAccent,
+      child: SANDEEP(),
+    ),
+  )));
+}
+2b.row,column and stack
+import 'package:flutter/material.dart';
+class textwidget extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+return Container(
+  margin: EdgeInsets.all(15.0),
+  child: Text("HELLO A.S.K  ",textDirection: TextDirection.ltr,style: TextStyle(decoration: TextDecoration.none,color: Colors.red),),
+
+)    ;
+  }
+}
+class stack extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+
+      child: Stack(
+
+        children: [
+
+          Container(
+            height: 200,
+            width: 200,
+            color: Colors.blue,
+          ),
+          Positioned(
+            left: 10,
+            right: 10,
+            top: 10,
+            bottom: 10,
+            child: Container(
+            height: 160,
+            width: 160,
+            color: Colors.green,
+          ),),
+          Positioned(
+              left: 20,
+              right: 20,
+              bottom: 20,
+              top: 20,
+              child:Container(
+            height: 120,
+            width: 120,
+            color: Colors.red,
+          ) ),
+          Positioned(
+              left: 80,
+              right: 80,
+              bottom: 80,
+              top: 80,
+              child:Text("A.S.K")),
+
+
+
+        ],
+      ),
+    );
+  }
+}
+class Col extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: [
+          Text("This is column"),
+          textwidget(),
+          textwidget(),
+          textwidget(),
+        ],
+      ),
+    );
+  }
+}
+class row extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Row(
+        children: <Widget>[
+          Text("Row"),
+          textwidget(),
+          textwidget(),
+          textwidget(),
+        ],
+      ),
+    );
+  }
+}
+class Sandeep extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: <Widget>[
+          stack(),
+          Col(),
+          row(),
+        ],
+      ),
+    );
+  }
+}
+void main(){
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    title: "row , column and stack widget",
+    home: Scaffold(
+      appBar: AppBar(title: Text("A.S.K APP",style: TextStyle(fontSize: 35.0),),),
+      body: Material(
+        color: Colors.cyan,
+        child: Sandeep(),
+      ),
+    ),
+  ));
+}
+3.responsive UI that adapts different screen sizes
+import 'package:flutter/material.dart';
+class smallLayout extends StatelessWidget{
+
+  @override
+  Widget build(BuildContext context) {
+    var sandy=MediaQuery.of(context).orientation;
+    return  Row(
+      children: [
+        if(MediaQuery.of(context).size.width>=600)
+          Container(
+            color: Colors.green,
+            width: 100,
+            child: Center(child: Text("Small layout $sandy"),),
+          ),
+​
+        Expanded(child: Container(
+          color: Colors.red,
+          child: Center(child:Text("Small layout $sandy") ,),
+        )),
+        Expanded(child: Container(
+          color: Colors.blue,
+          child: Center(child:Text("Small layout $sandy") ,),
+        )),
+      ],
+    );
+  }
+}
+class largeLayout extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    var sandy=MediaQuery.of(context).orientation;
+    return  Row(
+      children: [
+        if(MediaQuery.of(context).size.width>=600)
+          Container(
+            color: Colors.green,
+            width: 200,
+            child: Center(child:Text("Large layout $sandy") ,),
+          ),
+        Expanded(child: Container(
+          color: Colors.red,
+          child: Center(child:Text("Large layout $sandy") ,),
+        )),
+        Expanded(child: Container(
+          color: Colors.blue,
+          child: Center(child:Text("Large layout $sandy") ,),
+        ))
+      ],
+    );
+  }
+}
+class Sandeep extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+    double small=400.0;
+    double large=1000.0;
+    double width=MediaQuery.of(context).size.width;
+    return MaterialApp(
+      title: "responsive UI",
+      home: Scaffold(
+        appBar: AppBar(title: Text("A.S.K APP")),
+        body: LayoutBuilder(
+            builder: (context,constraints){
+              if (width<= large){
+                return smallLayout();
+4.navigation different screens
+(first.dart)
+import 'package:flutter/material.dart';
+import 'package:project4/second.dart';
+
+class Sandeep extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("A.S.K APP",style: TextStyle(fontSize: 35.0),),),
+      backgroundColor: Colors.lightBlueAccent,
+      body: Center(
+
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.red, // Button background color
+            foregroundColor: Colors.white, // Button text color
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Kumar()),
+            );
+          },
+          child: Text("Second Page"),
+        ),
+      ),
+    );
+  }
+}
+(main.dart)
+import 'package:flutter/material.dart';
+import 'package:project4/first.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: "ASK APP",
+      home: Sandeep(),
+    );
+  }
+}
+(second.dart)
+import 'package:flutter/material.dart';
+import 'package:project4/first.dart';
+
+class Kumar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("A.S.K APP",style: TextStyle(fontSize: 35.0),),),
+backgroundColor: Colors.lightBlueAccent,
+      body: Center(
+
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.red, // Button background color
+            foregroundColor: Colors.white, // Button text color
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Sandeep()),
+            );
+          },
+          child: Text("First Page"),
+        ),
+      ),
+    );
+  }
+}
+6.custom widgets for specific ui elements
+import 'package:flutter/material.dart';
+
+class MyBox extends StatelessWidget {
+  final String name;
+  final String rollNo;
+  final String year;
+  final String branch;
+  final String college;
+  final Color boxColor; // Color specified by the user
+  final String imagePath; // Path or URL to the image
+
+  const MyBox({
+    Key? key,
+    required this.name,
+    required this.rollNo,
+    required this.year,
+    required this.branch,
+    required this.college,
+    required this.imagePath,
+    this.boxColor = Colors.white, // Default color
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 700,
+      height: 230,
+      margin: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(15.0),
+      decoration: BoxDecoration(
+        color: boxColor,
+        borderRadius: BorderRadius.circular(10.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 3,
+            blurRadius: 5,
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          // Circular Image
+          CircleAvatar(
+            radius: 40, // Adjust the radius as needed
+            backgroundImage: AssetImage(imagePath), // Use NetworkImage for URLs
+          ),
+          SizedBox(width: 20), // Space between the image and text
+          // Text Details
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Name: $name", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                SizedBox(height: 8),
+                Text("Roll No: $rollNo", style: TextStyle(fontSize: 14)),
+                SizedBox(height: 8),
+                Text("Year: $year", style: TextStyle(fontSize: 14)),
+                SizedBox(height: 8),
+                Text("Branch: $branch", style: TextStyle(fontSize: 14)),
+                SizedBox(height: 8),
+                Text("College: $college", style: TextStyle(fontSize: 14)),
+                SizedBox(height: 8),
+                ElevatedButton(onPressed: (){}, child: Text("View Info"), style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.black,
+                ),)
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+            title: Text("Thriveni's Profile"),
+            backgroundColor: Colors.blue
+        ),
+        body:     MyBox(
+          name: "Sanugula Thriveni",
+          rollNo: "23vd5a509",
+          year: "3rd Year",
+          branch: "Computer Science",
+          college: "JNTUHUCEM",
+          imagePath: 'images/3.jpg', // Replace with your image asset
+          boxColor: Colors.blue,
+        ),
+
+
+      ),
+
+
+    );
+  }
+}
+
+void main() {
+  runApp(MyApp());
+} 
+7.input fields
+import 'package:flutter/material.dart';
+
+class Sravani extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Name Field
+          TextField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: "Enter your name",
+              prefixIcon: Icon(Icons.person),
+            ),
+          ),
+          SizedBox(height: 16.0),
+
+          // Age Field
+          TextField(
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: "Age",
+              prefixIcon: Icon(Icons.calendar_today),
+            ),
+          ),
+          SizedBox(height: 16.0),
+
+          // Mobile Number Field
+          TextField(
+            keyboardType: TextInputType.phone,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: "Mobile Number",
+              prefixIcon: Icon(Icons.phone),
+            ),
+          ),
+
+          // Email Field
+          TextField(
+            keyboardType: TextInputType.emailAddress,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: "Email",
+              prefixIcon: Icon(Icons.email),
+            ),
+          ),
+          SizedBox(height: 16.0),
+
+          // Address Field
+          TextField(
+            maxLines: 3,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: "Address",
+              prefixIcon: Icon(Icons.location_on), // Changed icon to location_on
+            ),
+          ),
+
+          // Submit Button
+          Center(
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue,
+                foregroundColor: Colors.black,
+              ),
+              onPressed: () {
+                // Add functionality here if needed
+              },
+              child: Text("Submit"),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+void main() {
+  runApp(MaterialApp(
+    title: 'Form with Input Fields',
+    home: Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "SRAV App",
+          style: TextStyle(fontSize: 35.0),
+        ),
+      ),
+      body: Material(
+        child: Sravani(),
+      ),
+    ),
+  ));
+}
+
+
+
+
+
+
